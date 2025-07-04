@@ -1,57 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ICT 211 PROJ</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Group 13 </title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      background-color: #011c40;
+      color: #27e9b5;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Bebas Neue', Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 10vw;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    #chaseBtn {
+      padding: 15px 30px;
+      border: 2px solid #27e9b5;
+      background: transparent;
+      color: #27e9b5;
+      font-size: 1.2rem;
+      border-radius: 10px;
+      position: absolute;
+      top: 65%;
+      cursor: pointer;
+      transition: top 0.3s ease, left 0.3s ease, background 0.3s ease;
+    }
+
+    #chaseBtn:hover {
+      background-color: #27e9b5;
+      color: #011c40;
+    }
+  </style>
 </head>
 <body>
-    <div class="header">
-        <h3>NIKIA</h3>
+  <h1>Group 13 Presents</h1>
+  <button id="chaseBtn">Click Me</button>
 
-        <div class="links">
-            <a class="nav-link" href="index.html">HOME</a>
-            <a class="nav-link" href="collection.html">COLLECTIONS</a>
-            <a class="nav-link" href="about.html">ABOUT</a>
-            <a class="nav-link" href="contact.html">CONTACT</a>
-        </div>
-    </div>
+  <script>
+    const button = document.getElementById('chaseBtn');
+    let attempts = 0;
+    const maxAttempts = 5;
 
-    <section class="main">
-        <div class="imageTypo">
-            <h1>NIKIA</h1>
-            <h1 class="outline">NIKIA</h1>
-            <img src="Images/BG kicks 2.webp" alt="">
-        </div>
+    button.addEventListener('mouseenter', () => {
+      if (attempts < maxAttempts) {
+        const newTop = Math.random() * (window.innerHeight - 100);
+        const newLeft = Math.random() * (window.innerWidth - 120);
+        button.style.top = `${newTop}px`;
+        button.style.left = `${newLeft}px`;
+        attempts++;
+        if (attempts === maxAttempts) {
+          button.textContent = "Tap Enter";
+        }
+      }
+    });
 
-    <div class="description">
-        <h2>NIKIA SHOE BRAND</h2>
-        <h5>"Step boldly into NIKIA shoes redefine every stride with style, comfort, and confidence."</h5>
-
-        <div class="disp">
-            <h6>Kak HN CTPaHHO Air Max Speed - sdh wduh uwshbwh wuhbsah wshbwqahj quabdwi wubwj kudhsh wishbjsb isajwz wajuw wjxbjw wajzba jah wahnjab xsxb</h6>
-            <h1>Pa3Map</h1>
-            <div class="Sizes">
-                <button>40</button>
-                <button>41</button>
-                <button>42</button>
-                <button>43</button>
-                <button>44</button>
-            </div>
-        
-        </div>
-    </div>
-    </section>
-<footer>
-    <p>&copy; 2025 NIKIA. All Rights Reserved.</p>
-    <div class="socials">
-        <a href="#">Instagram</a>
-        <a href="#">Twitter</a>
-        <a href="#">Facebook</a>
-    </div>
-</footer>
-
-<script src="app.js"></script>
+    // Redirect when Enter is pressed
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        window.location.href = 'home.html';
+      }
+    });
+  </script>
 </body>
 </html>
