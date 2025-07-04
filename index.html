@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Group 13 </title>
+  <title>Group 13</title>
   <style>
     * {
       margin: 0;
@@ -21,6 +21,7 @@
       align-items: center;
       font-family: 'Bebas Neue', Arial, sans-serif;
       overflow: hidden;
+      text-align: center;
     }
 
     h1 {
@@ -33,17 +34,22 @@
       to { opacity: 1; transform: scale(1); }
     }
 
-    #chaseBtn {
+    #chaseBtn, #mobileEnterBtn {
       padding: 15px 30px;
       border: 2px solid #27e9b5;
       background: transparent;
       color: #27e9b5;
       font-size: 1.2rem;
       border-radius: 10px;
-      position: absolute;
-      top: 65%;
       cursor: pointer;
-      transition: top 0.3s ease, left 0.3s ease, background 0.3s ease;
+      margin-top: 20px;
+      transition: all 0.3s ease;
+      position: absolute;
+    }
+
+    #mobileEnterBtn {
+      position: static;
+      display: none;
     }
 
     #chaseBtn:hover {
@@ -53,32 +59,45 @@
   </style>
 </head>
 <body>
-  <h1>Group 13 Presents</h1>
+  <h1>Group 13</h1>
   <button id="chaseBtn">Click Me</button>
+  <button id="mobileEnterBtn">Enter</button>
 
   <script>
     const button = document.getElementById('chaseBtn');
+    const mobileBtn = document.getElementById('mobileEnterBtn');
+
     let attempts = 0;
     const maxAttempts = 5;
 
-    button.addEventListener('mouseenter', () => {
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    const eventType = isMobile ? 'touchstart' : 'mouseenter';
+
+    button.addEventListener(eventType, () => {
       if (attempts < maxAttempts) {
         const newTop = Math.random() * (window.innerHeight - 100);
-        const newLeft = Math.random() * (window.innerWidth - 120);
+        const newLeft = Math.random() * (window.innerWidth - 150);
         button.style.top = `${newTop}px`;
         button.style.left = `${newLeft}px`;
         attempts++;
+
         if (attempts === maxAttempts) {
-          button.textContent = "Tap Enter";
+          button.textContent = 'Tap Enter';
+          if (isMobile) mobileBtn.style.display = 'inline-block';
         }
       }
     });
 
-    // Redirect when Enter is pressed
+    // Desktop: Press Enter to redirect
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') {
         window.location.href = 'home.html';
       }
+    });
+
+    // Mobile: Press Enter button to redirect
+    mobileBtn.addEventListener('click', () => {
+      window.location.href = 'home.html';
     });
   </script>
 </body>
